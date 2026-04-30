@@ -1,0 +1,32 @@
+---
+description: "Python FastAPI backend conventions for apps/api/"
+globs:
+  - "apps/api/**/*.py"
+alwaysApply: false
+---
+
+# Python Backend Rules
+
+## Structure
+Feature-based organization: each feature is a directory under `app/` with:
+- `router.py` — FastAPI route handlers (thin, delegate to service)
+- `service.py` — Business logic
+- `schemas.py` — Pydantic request/response models
+- `repository.py` — Data access (when DB is added)
+- `dependencies.py` — Feature-specific dependency injection
+
+## Code Style
+- Python 3.12+, use modern type hints (e.g., `list[str]` not `List[str]`)
+- Format with `ruff format`, lint with `ruff check`
+- Use `async def` for route handlers
+- Pydantic v2 for all schemas
+- No business logic in route handlers — delegate to service layer
+
+## Testing
+- Tests mirror app structure under `tests/`
+- Use `TestClient` from FastAPI for API tests
+- Run: `cd apps/api && source .venv/bin/activate && pytest -v`
+
+## Dependencies
+- Managed via `pyproject.toml` with `uv`
+- Install: `cd apps/api && uv venv && source .venv/bin/activate && uv pip install -e ".[dev]"`

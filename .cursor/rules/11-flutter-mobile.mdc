@@ -1,0 +1,41 @@
+---
+description: "Flutter mobile app conventions for apps/mobile/"
+globs:
+  - "apps/mobile/**/*.dart"
+alwaysApply: false
+---
+
+# Flutter Mobile Rules
+
+## Structure (Clean Architecture)
+```
+lib/
+├── core/           # App-wide: config, theme, network client
+│   ├── config/
+│   ├── theme/
+│   └── network/
+├── features/       # Feature modules (perks, auth, etc.)
+│   └── <feature>/
+│       ├── data/           # Repositories, data sources
+│       ├── domain/         # Entities, use cases
+│       └── presentation/  # Screens, widgets, state
+└── shared/         # Shared widgets, utilities
+    └── widgets/
+```
+
+## Code Style
+- Follow `flutter_lints` (configured in `analysis_options.yaml`)
+- Use `const` constructors wherever possible
+- Prefer composition over inheritance for widgets
+- Use Material 3 (`useMaterial3: true`)
+- Named parameters for widget constructors
+
+## Testing
+- Widget tests in `test/`
+- Run: `cd apps/mobile && flutter test`
+- Analyze: `cd apps/mobile && flutter analyze`
+
+## API Integration
+- All API calls go through `ApiClient` in `core/network/`
+- Use repository pattern in `features/<feature>/data/`
+- API base URL configured in `core/config/api_config.dart`

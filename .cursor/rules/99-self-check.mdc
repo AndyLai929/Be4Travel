@@ -1,0 +1,20 @@
+---
+description: "Pre-commit self-check: 6 questions before completing any task"
+alwaysApply: true
+---
+
+# Self-Check Before Completing a Task
+
+Before marking any task as done, answer these 6 questions:
+
+1. **Changed something unintended?** — Review the diff. Only files related to the task should be modified.
+2. **Is it rollback-safe?** — Can the change be reverted without data loss or breaking other features?
+3. **Hidden assumptions?** — Did you assume a business rule, user behavior, or API contract that isn't documented?
+4. **Hidden state?** — Does the change introduce global/shared mutable state that could cause bugs?
+5. **Test coverage?** — Is the change covered by automated tests? If not, why?
+6. **Quick to diagnose?** — If this breaks in production, can the issue be identified within 5 minutes from logs/errors?
+
+## Corrective Actions
+- If any answer is concerning, fix it before completing.
+- If a functional change was made, ensure `docs/DECISIONS.md` is updated (if relevant).
+- Run both linters: `ruff check` (Python) and `flutter analyze` (Flutter).
