@@ -1,0 +1,35 @@
+---
+description: "Project governance: decision priorities, change boundaries, and monorepo conventions"
+alwaysApply: true
+---
+
+# Be4Travel Governance
+
+## Project Overview
+Be4Travel is a perk suggestion app for travel plans — Miles, STPC, Tourism Voucher, Transfer Voucher, etc.
+
+## Architecture
+- **Monorepo** with two main apps:
+  - `apps/mobile/` — Flutter (Dart) frontend
+  - `apps/api/` — Python FastAPI backend
+  - `packages/` — Shared packages (future)
+- Dependencies flow inward: mobile → api (via HTTP). Never api → mobile.
+
+## Decision Priority
+1. Correctness
+2. Rollback safety
+3. Simplicity
+4. Performance
+
+## Change Boundaries
+- Cross-module changes (mobile + api) require explicit plan
+- API contract changes require updating both sides
+- Never modify generated files in `apps/mobile/build/` or `apps/api/.venv/`
+
+## Commands Reference
+- **API**: `cd apps/api && source .venv/bin/activate && pytest` / `ruff check` / `uvicorn app.main:app --reload`
+- **Mobile**: `cd apps/mobile && flutter test` / `flutter analyze` / `flutter run -d web-server --web-port=3000`
+- **Both lint**: run api and mobile lint separately
+
+## Decisions Log
+Record architectural decisions in `docs/DECISIONS.md` with: title, background, decision, trade-offs.

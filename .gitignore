@@ -1,0 +1,31 @@
+# === Python ===
+apps/api/.venv/
+apps/api/__pycache__/
+apps/api/**/__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# === Flutter ===
+apps/mobile/build/
+apps/mobile/.dart_tool/
+apps/mobile/.packages
+apps/mobile/.flutter-plugins
+apps/mobile/.flutter-plugins-dependencies
+
+# === IDE ===
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# === Harness runtime state ===
+.agents/state.json
+.agents/.stop
+
+# === OS ===
+.DS_Store
+Thumbs.db
